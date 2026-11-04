@@ -13,6 +13,9 @@ export const env = {
     MONGO_URI: process.env.MONGO_URI,
     REDIS_HOST: process.env.REDIS_HOST,
     REDIS_PORT: process.env.REDIS_PORT,
+    REDIS_PASSWORD: process.env.REDIS_PASSWORD,
+    REDIS_URL: process.env.REDIS_URL,
+    REDIS_TLS: process.env.REDIS_TLS === 'true',
     CACHE_TTL: parseInt(process.env.CACHE_TTL || '60', 10),
     CORS_ORIGIN: process.env.CORS_ORIGIN || '*',
 };
@@ -22,4 +25,5 @@ console.log('🔧 Config cargada:', {
     MONGO_URI: env.MONGO_URI,
     REDIS_HOST: env.REDIS_HOST,
     REDIS_PORT: env.REDIS_PORT,
+    REDIS_URL: env.REDIS_URL ? 'DEFINIDA' : undefined,
 });
