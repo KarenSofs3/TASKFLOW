@@ -1,20 +1,13 @@
 // src/socket/eventBus.js
-import Redis from 'ioredis';
-import { env } from '../config/env.js';
+import { crearConexionRedis } from '../config/redis.js';
 
 const CANAL = 'taskflow:eventos';
 
 // Publicador (lo usa el backend y el worker)
-export const publisher = new Redis({
-    host: env.REDIS_HOST,
-    port: env.REDIS_PORT,
-});
+export const publisher = crearConexionRedis();
 
 // Suscriptor (solo lo usa el backend para reenviar a Socket.IO)
-export const subscriber = new Redis({
-    host: env.REDIS_HOST,
-    port: env.REDIS_PORT,
-});
+export const subscriber = crearConexionRedis();
 
 export const publicarEvento = async (evento, payload) => {
     await publisher.publish(CANAL, JSON.stringify({ evento, payload }));
